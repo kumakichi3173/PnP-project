@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2020/02/ProvisioningSchema">
   <pnp:Preferences Generator="OfficeDevPnP.Core, Version=3.28.2012.0, Culture=neutral, PublicKeyToken=5e633289e95c321a" />
-  <pnp:Templates ID="CONTAINER-TEMPLATE-69D0AB496C0A49628D354C12159740C4">
-    <pnp:ProvisioningTemplate ID="TEMPLATE-69D0AB496C0A49628D354C12159740C4" Version="1" BaseSiteTemplate="TEAMCHANNEL#1" Scope="RootSite">
+  <pnp:Templates ID="CONTAINER-TEMPLATE-6A9C856EC5534B1085442700AFAC31E2">
+    <pnp:ProvisioningTemplate ID="TEMPLATE-6A9C856EC5534B1085442700AFAC31E2" Version="1" BaseSiteTemplate="TEAMCHANNEL#1" Scope="RootSite">
       <pnp:WebSettings RequestAccessEmail="" NoCrawl="false" WelcomePage="SitePages/Home.aspx" SiteLogo="" AlternateCSS="" MasterPageUrl="{masterpagecatalog}/seattle.master" CustomMasterPageUrl="{masterpagecatalog}/seattle.master" CommentsOnSitePagesDisabled="false" QuickLaunchEnabled="true" MembersCanShare="true" SearchScope="DefaultScope" SearchBoxInNavBar="Inherit" />
       <pnp:SiteSettings AllowDesigner="true" SearchBoxInNavBar="Inherit" SearchCenterUrl="" />
       <pnp:RegionalSettings AdjustHijriDays="0" AlternateCalendarType="None" CalendarType="Gregorian" Collation="25" FirstDayOfWeek="Sunday" FirstWeekOfYear="0" LocaleId="1033" ShowWeeks="false" Time24="false" TimeZone="13" WorkDayEndHour="5:00PM" WorkDays="62" WorkDayStartHour="8:00AM" />
@@ -68,7 +68,7 @@
         <pnp:PropertyBagEntry Key="vti_extenderversion" Value="16.0.0.26622" Overwrite="false" />
         <pnp:PropertyBagEntry Key="SiteDisableCompanyWideSharingLinks" Value="FALSE" Overwrite="false" />
         <pnp:PropertyBagEntry Key="vti_defaultlanguage" Value="en-us" Overwrite="false" />
-        <pnp:PropertyBagEntry Key="TeamChannelManager_LastSyncTimeStamp" Value="11/20/2025 9:45:08 PM" Overwrite="false" />
+        <pnp:PropertyBagEntry Key="TeamChannelManager_LastSyncTimeStamp" Value="11/20/2025 10:11:53 PM" Overwrite="false" />
         <pnp:PropertyBagEntry Key="profileschemaversion" Value="1" Overwrite="false" />
         <pnp:PropertyBagEntry Key="vti_indexedpropertykeys" Value="" Overwrite="false" />
         <pnp:PropertyBagEntry Key="vti_associatevisitorgroup" Value="4" Overwrite="false" />
@@ -343,11 +343,14 @@
               <JSLink>clienttemplates.js</JSLink>
             </View>
           </pnp:Views>
+          <pnp:Fields>
+            <Field Type="Text" Name="Category" DisplayName="Category" ID="{82aa2343-47ca-4f2f-90d1-0e2cccba8096}" Group="" Required="FALSE" SourceID="{{listid:Documents}}" StaticName="Category" ColName="nvarchar17" RowOrdinal="0" />
+          </pnp:Fields>
           <pnp:FieldRefs>
-            <pnp:FieldRef ID="d307dff3-340f-44a2-9f4b-fbfe1ba07459" Name="_CommentCount" DisplayName="Comment count" />
-            <pnp:FieldRef ID="db8d9d6d-dc9a-4fbd-85f3-4a753bfdc58c" Name="_LikeCount" DisplayName="Like count" />
             <pnp:FieldRef ID="76d13cd2-1bae-45a5-8b74-545b87b65037" Name="_ColorTag" DisplayName="Color Tag" />
             <pnp:FieldRef ID="cb19284a-cde7-4570-a980-1dab8bd74470" Name="_ExtendedDescription" DisplayName="Description" />
+            <pnp:FieldRef ID="d307dff3-340f-44a2-9f4b-fbfe1ba07459" Name="_CommentCount" DisplayName="Comment count" />
+            <pnp:FieldRef ID="db8d9d6d-dc9a-4fbd-85f3-4a753bfdc58c" Name="_LikeCount" DisplayName="Like count" />
           </pnp:FieldRefs>
           <pnp:Security>
             <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">
@@ -388,6 +391,9 @@
             <pnp:FieldRef ID="76d13cd2-1bae-45a5-8b74-545b87b65037" Name="_ColorTag" DisplayName="Color Tag" />
             <pnp:FieldRef ID="cb19284a-cde7-4570-a980-1dab8bd74470" Name="_ExtendedDescription" DisplayName="Description" />
           </pnp:FieldRefs>
+          <pnp:Webhooks>
+            <pnp:Webhook ServerNotificationUrl="https://southcentralus1-1.pushnp.svc.ms/notifications?token=b89fd205-d578-49d9-b276-b470e27c433f%2Fb!NpuEc4JnHk2Mi25YQgeuBKIJ7aK3BX5GisLmA6NwAyz9mDjWX0zJT4phWHXRsQ0q" ExpiresInDays="1" />
+          </pnp:Webhooks>
         </pnp:ListInstance>
         <pnp:ListInstance Title="Site Pages" Description="" DocumentTemplate="" OnQuickLaunch="true" TemplateType="119" Url="SitePages" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" TemplateFeatureID="00bfea71-c796-4402-9f2f-0eb9a6e71b18" ContentTypesEnabled="true" EnableAttachments="false" EnableFolderCreation="false" DefaultDisplayFormUrl="{site}/SitePages/Forms/DispForm.aspx" DefaultEditFormUrl="{site}/SitePages/Forms/EditForm.aspx" DefaultNewFormUrl="{site}/SitePages/Forms/Upload.aspx" ImageUrl="/_layouts/15/images/itdl.png?rev=48" IrmExpire="false" IrmReject="false" IsApplicationList="true" ValidationFormula="" ValidationMessage="">
           <pnp:ContentTypeBindings>
@@ -515,6 +521,9 @@
             <pnp:FieldRef ID="139da674-dbf6-439f-98e0-4eb05fa9a669" Name="_OriginalSourceListId" DisplayName="Original Source List ID" />
             <pnp:FieldRef ID="91e86a43-75f2-426f-80da-35edfb47d55d" Name="_OriginalSourceItemId" DisplayName="Original Source Item ID" />
           </pnp:FieldRefs>
+          <pnp:Webhooks>
+            <pnp:Webhook ServerNotificationUrl="https://southcentralus1-4.pushnp.svc.ms/notifications?token=b89fd205-d578-49d9-b276-b470e27c433f%2Fb!NpuEc4JnHk2Mi25YQgeuBKIJ7aK3BX5GisLmA6NwAyxv4j0WfgGiRp0_o2X2-KNN" ExpiresInDays="1" />
+          </pnp:Webhooks>
         </pnp:ListInstance>
         <pnp:ListInstance Title="Style Library" Description="Use the style library to store style sheets, such as CSS or XSL files. The style sheets in this gallery can be used by this site or any of its subsites." DocumentTemplate="" TemplateType="101" Url="Style Library" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="500" DraftVersionVisibility="0" TemplateFeatureID="00bfea71-e717-4e80-aa17-d0c71b360101" EnableAttachments="false" DefaultDisplayFormUrl="{site}/Style Library/Forms/DispForm.aspx" DefaultEditFormUrl="{site}/Style Library/Forms/EditForm.aspx" DefaultNewFormUrl="{site}/Style Library/Forms/Upload.aspx" ImageUrl="/_layouts/15/images/itdl.png?rev=48" IrmExpire="false" IrmReject="false" IsApplicationList="false" ValidationFormula="" ValidationMessage="">
           <pnp:ContentTypeBindings>

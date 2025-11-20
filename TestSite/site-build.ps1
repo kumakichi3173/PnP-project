@@ -1,68 +1,68 @@
-# ===========================================
+# =========================================== 
 # site-build.ps1
-# SharePoint Online ゼロからサイト構築用スクリプト（VS Code用）
-# 実行は権限を持つユーザーが行う前提
+# SharePoint Online ゼロからサイト構築用スクリプト（旧版 PnP 専用）
 # ===========================================
 
 # -----------------------------
 # 1. 接続設定
 # -----------------------------
-Write-Host "=== Connect-PnPOnline で接続する予定 ==="
-# Connect-PnPOnline -Url "https://caitacgarment.sharepoint.com/sites/ProdSite" -UseWebLogin
+Write-Host "=== Connect-PnPOnline で接続 ==="
+# Connect-PnPOnline -Url "https://cgpinc.sharepoint.com/sites/CaitacApps-TheHubSiteProd" -UseWebLogin
 
 # -----------------------------
-# 2. サイト作成
+# 2. サイト作成（旧版）
+# ※旧版では Add-PnPSite は存在せず、CommunicationSite 作成機能は非対応
 # -----------------------------
-Write-Host "=== サイト作成 ==="
-# New-PnPSite -Type CommunicationSite -Title "ProdSite" -Url "https://caitacgarment.sharepoint.com/sites/ProdSite" -Owner "you@caitacgarment.com"
+Write-Host "=== サイト作成（旧版はスキップ推奨） ==="
+# 旧版は New-PnPSite コマンドが存在しません
 
 # -----------------------------
-# 3. リスト作成
+# 3. リスト作成（旧版は New-PnPList）
 # -----------------------------
 Write-Host "=== リスト作成 ==="
 $lists = @("Tasks", "Documents")
 foreach ($list in $lists) {
     Write-Host "作成予定リスト: $list"
-    # Add-PnPList -Title $list -Template GenericList
+    # New-PnPList -Title $list -Template GenericList
 }
 
 # -----------------------------
-# 4. 列作成
+# 4. 列作成（旧版OK）
 # -----------------------------
 Write-Host "=== 列作成 ==="
 $fields = @(
-    @{ List="Tasks"; Name="Due Date"; Type="DateTime" },
-    @{ List="Tasks"; Name="Assigned To"; Type="User" }
+    @{ List="Tasks"; Name="DueDate"; Display="Due Date"; Type="DateTime" },
+    @{ List="Tasks"; Name="AssignedTo"; Display="Assigned To"; Type="User" }
 )
-foreach ($field in $fields) {
-    Write-Host "作成予定: $($field.List) の列 $($field.Name)"
-    # Add-PnPField -List $field.List -DisplayName $field.Name -Type $field.Type
+foreach ($f in $fields) {
+    Write-Host "作成予定列: $($f.Display)"
+    # Add-PnPField -List $f.List -DisplayName $f.Display -InternalName $f.Name -Type $f.Type
 }
 
 # -----------------------------
-# 5. ページ作成・Webパーツ配置
+# 5. ページ作成（旧版）
 # -----------------------------
 Write-Host "=== ページ作成・Webパーツ配置 ==="
 $pages = @("Home", "ProjectOverview")
-foreach ($page in $pages) {
-    Write-Host "作成予定ページ: $page"
-    # Add-PnPPage -Name $page -Layout Home
-    # Add-PnPClientSideWebPart -Page $page -DefaultWebPartType "DocumentLibrary" -WebPartProperties @{ "Title"="Documents" }
+foreach ($p in $pages) {
+    Write-Host "作成予定ページ: $p"
+    # Add-PnPClientSidePage -Name "$p.aspx" -LayoutType Home
+    # Add-PnPClientSideWebPart -Page "$p.aspx" -DefaultWebPartType DocumentLibrary
 }
 
 # -----------------------------
-# 6. 権限設定
+# 6. 権限設定（旧版OK）
 # -----------------------------
 Write-Host "=== 権限設定 ==="
 $groups = @(
-    @{ Group = "Members"; Users = @("user1@caitacgarment.com", "user2@caitacgarment.com") },
-    @{ Group = "Visitors"; Users = @("user3@caitacgarment.com") }
+    @{ Group = "Members"; Users = @("user1@caitacgarment.com") },
+    @{ Group = "Visitors"; Users = @("user2@caitacgarment.com") }
 )
 foreach ($g in $groups) {
-    Write-Host "グループ $($g.Group) にユーザー追加予定: $($g.Users -join ', ')"
+    Write-Host "グループ $($g.Group) に $($g.Users -join ', ') を追加予定"
     # foreach ($u in $g.Users) {
     #     Add-PnPGroupMember -Identity $g.Group -Users $u
     # }
 }
 
-Write-Host "=== スクリプト構造完成。編集・レビュー可能 ==="
+Write-Host "=== 旧版PnP専用 site-build.ps1: 完成！ ==="
