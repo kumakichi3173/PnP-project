@@ -23,7 +23,7 @@ Write-Host "=== リスト作成 ==="
 $lists = @("Tasks", "Documents")
 foreach ($list in $lists) {
     Write-Host "作成予定リスト: $list"
-    # New-PnPList -Title $list -Template GenericList
+    New-PnPList -Title $list -Template GenericList
 }
 
 # -----------------------------
