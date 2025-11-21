@@ -1,0 +1,59 @@
+# Azure DevOps Pipeline for SharePoint Site Deployment
+# Dev → Prod 自動デプロイメント
+
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - templates/DevTemplate.xml
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  devSiteUrl: 'https://cgpinc.sharepoint.com/sites/CaitacApps-TheHubSiteDev'
+  prodSiteUrl: 'https://cgpinc.sharepoint.com/sites/CaitacApps-TheHubSiteProd'
+
+stages:
+- stage: Extract
+  displayName: 'Extract from Dev'
+  jobs:
+  - job: ExtractTemplate
+    displayName: 'Extract template from Dev environment'
+    steps:
+    - task: PowerShell@2
+      displayName: 'Install PnP PowerShell'
+      inputs:
+        targetType: 'inline'
+        script: |
+          Install-Module SharePointPnPPowerShellOnline -Force -Scope CurrentUser
+    
+    - task: PowerShell@2
+      displayName: 'Extract template from Dev'
+      inputs:
+        filePath: '$(System.DefaultWorkingDirectory)/build/site-update.ps1'
+        arguments: '-DevUrl $(devSiteUrl)'
+      env:
+        SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+- stage: Deploy
+  displayName: 'Deploy to Prod'
+  dependsOn: Extract
+  condition: succeeded()
+  jobs:
+  - deployment: DeployToProd
+    displayName: 'Deploy template to Prod environment'
+    environment: 'Production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: PowerShell@2
+            displayName: 'Apply template to Prod'
+            inputs:
+              filePath: '$(System.DefaultWorkingDirectory)/build/site-update.ps1'
+              arguments: '-ProdUrl $(prodSiteUrl)'
+            env:
+              SYSTEM_ACCESSTOKEN: $(System.AccessToken)
